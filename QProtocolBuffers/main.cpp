@@ -4,6 +4,6 @@
 
 int main( int argc, char *argv[] )
 {
-    QObjectMacroGenerator gen;
-    return google::protobuf::compiler::PluginMain( argc, argv, &gen );
+    QObjectGenerator qobj_gen;
+    return google::protobuf::compiler::PluginMain( argc, argv, &qobj_gen );
 }

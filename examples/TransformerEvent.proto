@@ -1,0 +1,30 @@
+syntax = "proto2";
+package transformer;
+
+message Event {
+    required string datetime = 1; /* Must be in ISO-8601 format */
+    required int32 transformerID = 2; /* Unique ID of this transformer */
+    optional int32 eventID = 3; /* Unique event ID */
+
+    extensions 1000 to max;
+}
+
+/*
+    optional AnnunciatorEvent annunciator = 1000;
+    optional TemperatureEvent temperaturess = 1001;
+    optional CoolingSystemEvent cooling = 1002;
+    optional MetrologyEvent metrology = 1003;
+    optional LTCEvent ltc = 1008;
+    optional PowerMonitorEvent powermonitor = 1009;
+    optional PressureEvent pressure = 1010;
+    optional DGAEvent dga = 1011;
+    optional FanEvent fan = 1012;
+*/
+message RepeatedEvent {
+	repeated Event events = 1;
+        optional bool moreEvents = 2; /* Set to true if there are more events. */
+                                    /* Used when historical events are requested */
+                                    /* More events may be available if the resulting */
+                                    /* packet size would be too large. */
+
+}

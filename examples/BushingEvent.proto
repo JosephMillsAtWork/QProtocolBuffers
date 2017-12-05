@@ -1,0 +1,35 @@
+syntax = "proto2";
+import "TransformerEvent.proto";
+
+package transformer;
+
+message BushingEvent {
+        enum SignalQuality {
+                SIGNAL_UNKNOWN = 0;
+                SIGNAL_NA = 1;
+                SIGNAL_OK = 2;
+                SIGNAL_DOWN = 3;
+        }
+
+        message InsulogixBExtended {
+                optional int32 TanDelta = 1;
+                optional int32 PowerFactor = 2;
+                optional int32 Magnitude = 3;
+                optional int32 RelCap = 4;
+                optional int32 RefMagnitude = 5;
+                optional int32 RefTanDelta = 6;
+                optional int32 RefPowerFactor = 7;
+                optional int32 RefRelCap = 8;
+        }
+
+        required int32 bushing_id = 1;
+
+        optional int32 condition = 10;
+        optional SignalQuality signalQuality = 11;
+        optional InsulogixBExtended insulogixb_extended = 12;
+}
+
+extend Event {
+    optional BushingEvent bushing = 1016;
+}
+

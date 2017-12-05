@@ -1,29 +1,33 @@
 QT += core
 QT -= gui
 
-CONFIG += c++11
+CONFIG += \
+    c++11
 
-TARGET = QObjectMacroPlugin
+TARGET = QProtocolBuffers
 CONFIG += console
 CONFIG -= app_bundle
 
 TEMPLATE = app
 
 HEADERS += \
-    $$PWD/qobjectmacroplugin.h
+    $$PWD/qobjectmacroplugin.h \
+    $$PWD/enumgen.h \
+    $$PWD/objecthelper.h \
+    $$PWD/propertyhelper.h \
+    $$PWD/classhelper.h \
+    modelshelper.h
 
 SOURCES += \
     $$PWD/main.cpp \
-    $$PWD/qobjectmacroplugin.cpp
+    $$PWD/qobjectmacroplugin.cpp \
+    $$PWD/enumgen.cpp \
+    $$PWD/objecthelper.cpp \
+    $$PWD/propertyhelper.cpp \
+    $$PWD/classhelper.cpp \
+    $$PWD/modelshelper.cpp
 
 DEFINES += QT_DEPRECATED_WARNINGS
-
-
-
-
-
-
-
 
 unix:!macx: LIBS += -L/usr/local/lib/ -lprotoc
 unix:!macx: LIBS += -L/usr/local/lib/ -lprotobuf
