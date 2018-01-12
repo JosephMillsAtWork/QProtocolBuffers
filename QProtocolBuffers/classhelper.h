@@ -2,31 +2,29 @@
 
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/descriptor.pb.h>
-#include <google/protobuf/compiler/cpp/cpp_helpers.h>
 
 
 
 #ifndef CLASSHELPER_H
 #define CLASSHELPER_H
-using namespace google::protobuf;
+using namespace GOOGLE_NAMESPACE::protobuf;
 class ClassHelper : public ObjectHelper {
 public:
     explicit ClassHelper( const FileDescriptor *file ) :
         m_file( file )
     { }
 
-    std::__cxx11::string includesString() const
+    std::string includesString()
     {
-        std::__cxx11::string ret;
-
+        std::string ret;
         // FIXME get default headers
         ret = "#include <QObject>\n";
         ret += "#include \"QQmlObjectListModel.h\" \n \n" ;
 
         for( int i = 0; i < m_file->dependency_count(); i++ )
         {
-            auto d = m_file->dependency( i )->name();
-            std::__cxx11::string path = compiler::cpp::StripProto( d );
+            std::string d = m_file->dependency( i )->name();
+            std::string path = stripProto( d );
 
             QString camelPath = QString::fromStdString( path.c_str() );
             QString includePath = camelPath.append( ".pb.h" ).toLower() ;
@@ -38,7 +36,7 @@ public:
     }
 
 
-    std::__cxx11::string namespaceString( const std::__cxx11::string &packageName )
+    std::string namespaceString( const std::string &packageName )
     {
         // namespace
         QString ret = QString::fromStdString( packageName );
@@ -48,38 +46,37 @@ public:
                 .arg( ret )
                 .toStdString() ;
     }
-    std::__cxx11::string ifDefString( const std::__cxx11::string  &ifDefName ) const
+    std::string ifDefString( const std::string  &ifDefName ) const
     {
         return QString( "\n#ifndef %1\n#define %1" )
                 .arg( QString::fromStdString( ifDefName ) ).toStdString();
     }
-    std::__cxx11::string classString( const std::__cxx11::string  &classStr ) const
+    std::string classString( const std::string  &classStr ) const
     {
         return QString( "\nclass %1 : public QObject \n{" )
                 .arg( QString::fromStdString( classStr ) )
                 .toStdString();
     }
-    std::__cxx11::string classInfoString()const
+    std::string classInfoString()const
     {
         return "\n    Q_OBJECT"
-               "\n    Q_CLASSINFO( \"autor\", \"Synexxus\" )"
-               "\n    Q_CLASSINFO( \"url\", \"http://synexxus.com/\" )";
-
+               "\n    Q_CLASSINFO( \"autor\", \"\" )"
+               "\n    Q_CLASSINFO( \"url\", \"\" )" ;
     }
     // create the public explicit class
-    std::__cxx11::string explicitClassString( const QString &className )
+    std::string explicitClassString( const QString &className )
     {
         return QString("\npublic: "
                        "\n    explicit %1(" ).arg(className).toStdString();
     }
     // close the public explicit class
-    std::__cxx11::string closeExplicitClassString()
+    std::string closeExplicitClassString()
     {
         return "\n    {}" ;
     }
 
     // This is for properties
-    std::__cxx11::string constuctorString( const QHash<QString, QString> m_hash) const
+    std::string constuctorString( const QHash<QString, QString> m_hash) const
     {
         QString ret;
         int commaHelper = 0;
@@ -126,17 +123,17 @@ public:
         return ret.toStdString();
     }
 
-    std::__cxx11::string closeClassString() const
+    std::string closeClassString() const
     {
         return "\n};";
     }
-    std::__cxx11::string closeIfDefString( const QString &className )
+    std::string closeIfDefString( const QString &className )
     {
         return QString( "\n#endif // %1" )
                 .arg( classToIfDef( className ) )
                 .toStdString();
     }
-    std::__cxx11::string closeNameSpaceStirng() const
+    std::string closeNameSpaceStirng() const
     {
         return "\n}";
     }

@@ -5,5 +5,5 @@
 int main( int argc, char *argv[] )
 {
     QObjectGenerator qobj_gen;
-    return google::protobuf::compiler::PluginMain( argc, argv, &qobj_gen );
+    return GOOGLE_NAMESPACE::protobuf::compiler::PluginMain( argc, argv, &qobj_gen );
 }

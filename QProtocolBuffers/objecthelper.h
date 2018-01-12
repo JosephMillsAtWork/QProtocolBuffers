@@ -5,6 +5,7 @@
 #include <QString>
 #include <QChar>
 #include <QDebug>
+#include <QFileInfo>
 #include <stdio.h>
 class ObjectHelper : public QObject {
     Q_OBJECT
@@ -57,6 +58,18 @@ public:
         ret.replace(".", "::");
 
         return ret;
+    }
+
+
+    QString stripProto( QString fName )
+    {
+        return QFileInfo( fName ).baseName();
+    }
+
+
+    std::string stripProto( std::string fName )
+    {
+        return QFileInfo( QString::fromStdString( fName ) ).baseName().toStdString();
     }
 
     virtual void test() {}

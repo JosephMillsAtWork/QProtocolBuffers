@@ -27,7 +27,7 @@ public:
         m_iter = m_hash;
     }
 
-    std::__cxx11::string qPropertyString()
+    std::string qPropertyString()
     {
         QString ret;
         m_iter.toFront();
@@ -43,7 +43,7 @@ public:
     }
 
 
-    std::__cxx11::string getterSetterString()
+    std::string getterSetterString()
     {
         QString ret;
         m_iter.toFront();
@@ -74,7 +74,7 @@ public:
 
     // Fixme make a override here is need be on signals and what is getting
     // passed arround.
-    std::__cxx11::string signalsString(  const QString &type = "void" )
+    std::string signalsString(  const QString &type = "void" )
     {
         QString ret;
         m_iter.toFront();
@@ -90,7 +90,7 @@ public:
 
 
 
-    std::__cxx11::string privateString()
+    std::string privateString()
     {
         QString ret;
         m_iter.toFront();

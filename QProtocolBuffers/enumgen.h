@@ -21,7 +21,7 @@ public:
         m_hash = hash;
         m_iter = m_hash;
     }
-    std::__cxx11::string enumPropertyString()
+    std::string enumPropertyString()
     {
         QString ret;
         m_iter.toFront();
@@ -34,7 +34,7 @@ public:
         return ret.toStdString();
     }
 
-    std::__cxx11::string enumDefentionString()
+    std::string enumDefentionString()
     {
         QString ret;
         m_iter.toFront();

@@ -22,7 +22,7 @@ public:
         m_hash = hash;
         m_iter = m_hash;
     }
-    std::__cxx11::string modelString()
+    std::string modelString()
     {
         QString ret;
         m_iter.toFront();

@@ -20,9 +20,8 @@
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 #include <google/protobuf/io/printer.h>
 
-#include <google/protobuf/stubs/strutil.h>
+//#include <google/protobuf/stubs/strutil.h>
 #include <google/protobuf/compiler/code_generator.h>
-#include <google/protobuf/compiler/cpp/cpp_helpers.h>
 
 
 // 1 get the file and setup the FileDescriptor Done
@@ -33,9 +32,9 @@
 
 #include <memory>
 #include <stdexcept>
-using namespace std::__cxx11;
+using namespace std;
 
-namespace google {
+namespace GOOGLE_NAMESPACE {
 namespace protobuf {
 class DescriptorPool;
 class Descriptor;
@@ -48,7 +47,8 @@ class Printer;
 
 #ifndef QOBJECTGENERATOR_H
 #define QOBJECTGENERATOR_H
-using namespace google::protobuf;
+using namespace GOOGLE_NAMESPACE::protobuf;
+
 class QObjectGenerator : public compiler::CodeGenerator {
 public:
     virtual bool Generate(
@@ -64,10 +64,12 @@ private:
 
 
 class QCodeGenerator {
+
 public:
     QCodeGenerator( const FileDescriptor *file );
     ~QCodeGenerator();
-    void generateCode( io::Printer & );
+    void generateCode( io::Printer &p );
+
     void generateMessage( io::Printer &,
                           const Descriptor * );
 

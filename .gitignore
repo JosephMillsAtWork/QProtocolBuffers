@@ -1,3 +1,6 @@
+*.log
+*.pb.h
+*.DS_Store
 protobuf/**
 # C++ objects and libs
 
